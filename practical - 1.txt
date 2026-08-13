@@ -1,0 +1,82 @@
+map_rooms = {
+    "A": ["B", "C"],
+    "B": ["D"],
+    "C": ["D"],
+    "D": ["G"],
+    "G": [],
+}
+print("our map:")
+print("        A (start)")
+print("       / \\")
+print("      B   C")
+print("      \\  /")
+print("        D")
+print("        -")
+print("        G (Treasure )")
+print()
+print("Doors from each room:", map_rooms)
+
+
+2 
+ 
+
+
+def bfs(start, goal):
+  to_do = [start]
+  visited = set()
+  order = []
+
+  while to_do:
+    room = to_do.pop(0)
+
+    if room in visited:
+      continue
+    visited.add(room)
+    order.append(room)
+    if room == goal:
+      return order
+    for nxt in map_rooms[room]:
+      if nxt not in visited:
+        to_do.append(nxt)
+
+  return order
+order = bfs("A", "G")
+print("BFS checked the rooms in this order:", order)
+print("Number of rooms BFS checked:", len(order))
+
+3
+
+
+
+map_rooms = {
+    "A": ["B", "C"],
+    "B": ["D"],
+    "C": ["D"],
+    "D": ["G"],
+    "G": [],
+}
+
+def dfs(start, goal):
+  to_do = [start]
+  visited = []
+  order = []
+
+  while to_do:
+    room = to_do.pop()
+
+    if room in visited:
+      continue
+    visited.append(room)
+    order.append(room)
+
+    if room == goal:
+      return order
+
+    for nxt in map_rooms[room]:
+        to_do.append(nxt)
+
+  return order
+
+order = dfs("A", "G")
+print("DFS checked the rooms in this order:", order)
+print("Number of rooms DFS checked:", len(order))
